@@ -55,8 +55,7 @@ module Fluent
           events = get_events
           events.each do |event|
             time = (event.timestamp / 1000).floor
-            record = JSON.parse(event.message)
-            Engine.emit(@tag, time, record)
+            Engine.emit(@tag, time, {'message' => event.message})
           end
         end
         sleep 1
